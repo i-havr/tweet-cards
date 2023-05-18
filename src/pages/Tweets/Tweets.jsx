@@ -24,7 +24,7 @@ export default function TweetsPage() {
       setIsFirstRender(false);
       return;
     }
-  }, []);
+  }, [isFirstRender]);
 
   useEffect(() => {
     // if (currentPage === 1) {
