@@ -27,9 +27,9 @@ export default function TweetsPage() {
   }, []);
 
   useEffect(() => {
-    if (currentPage === 1) {
-      return;
-    }
+    // if (currentPage === 1) {
+    //   return;
+    // }
 
     const getUsersList = async () => {
       try {
