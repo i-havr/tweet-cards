@@ -2,14 +2,13 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://63df862d8b24964ae0ef2a08.mockapi.io";
 
-export const getUsers = async (currentPage, limit) => {
+export const getUsers = async (limit, page = 1) => {
   const response = await axios.get("/users", {
     params: {
-      page: currentPage,
       limit,
+      page,
     },
   });
-  console.log(response.count);
   return response.data;
 };
 

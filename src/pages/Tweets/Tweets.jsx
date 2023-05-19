@@ -6,6 +6,7 @@ import { HiArrowLeft, HiOutlineFilter } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 import { UsersList } from "../../components/UsersList/UsersList.jsx";
+import { Loader } from "../../components/Loader/Loader";
 import { Button } from "../../components/Button/Button";
 import { Pagination } from "../../components/Pagination/Pagination";
 
@@ -14,38 +15,44 @@ import * as SC from "./Tweets.styled.jsx";
 const PAGES_LIMIT = 3;
 
 export default function TweetsPage() {
-  const [users, setUsers] = useState(null);
+  const [users, setUsers] = useState([]);
   const [followed, setFollowed] = useLocalStorage("followed", []);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isEndOfList, setIsEndOfList] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
+
+  const isShowLoadMoreButton = users?.length > 0 && !isLoading && !isEndOfList;
+
+  const isShownEndOfList = isEndOfList && !isLoading;
+  const isShownLoader = isLoading || (isEndOfList && isLoading);
 
   useEffect(() => {
     if (isFirstRender) {
+      setIsEndOfList(false);
       setIsFirstRender(false);
       return;
     }
-  }, [isFirstRender]);
-
-  useEffect(() => {
-    // if (currentPage === 1) {
-    //   return;
-    // }
-
     const getUsersList = async () => {
       try {
-        const data = await getUsers(currentPage, PAGES_LIMIT);
-        setUsers((prev) => (prev ? [...prev, ...data] : [...data]));
+        setIsLoading(true);
+        const data = await getUsers(page * PAGES_LIMIT);
+        setUsers(data);
+        page * PAGES_LIMIT > data.length && setIsEndOfList(true);
       } catch (error) {
         console.log("Whoops, something went wrong ", error.message);
         return;
+      } finally {
+        setIsLoading(false);
       }
     };
     getUsersList();
-  }, [currentPage, followed, isFirstRender]);
+  }, [page, followed, isFirstRender]);
 
   const isFollowed = (id) => followed.includes(id);
 
   const toggleFollowing = async (id) => {
+    console.log(id);
     const user = users.find((user) => user.id === id);
 
     const body = isFollowed(id)
@@ -85,10 +92,11 @@ export default function TweetsPage() {
             onFollowButton={toggleFollowing}
             isFollowed={isFollowed}
           />
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+          {isShowLoadMoreButton && <Pagination page={page} setPage={setPage} />}
+          {isShownLoader && <Loader />}
+          {isShownEndOfList && (
+            <SC.EndOfListText>{"End of list :("}</SC.EndOfListText>
+          )}
         </SC.Container>
       </SC.Section>
     </SC.TweetsPage>

@@ -3,14 +3,14 @@ import { Button } from "../Button/Button";
 
 // import * as SC from "./Pagination.styled";
 
-export const Pagination = ({ setCurrentPage }) => {
+export const Pagination = ({ setPage }) => {
   const handleLoadMore = () => {
-    setCurrentPage((prev) => prev + 1);
+    setPage((prev) => prev + 1);
   };
 
   return <Button actionHandler={handleLoadMore}>load more</Button>;
 };
 
 Pagination.propTypes = {
-  setCurrentPage: PropTypes.func.isRequired,
+  setPage: PropTypes.func.isRequired,
 };

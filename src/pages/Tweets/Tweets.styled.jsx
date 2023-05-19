@@ -22,10 +22,18 @@ export const Container = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding-top: 20px;
+  padding-bottom: 60px;
 `;
 
 export const ButtonsWrapper = styled.div`
   display: flex;
   gap: 20px;
   margin: 0 auto 20px 10px;
+`;
+
+export const EndOfListText = styled.p`
+  display: flex;
+  align-items: center;
+  height: 80px;
+  font-size: 20px;
 `;
