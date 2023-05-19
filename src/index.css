@@ -19,7 +19,6 @@
 body {
   margin: 0;
   color: #ebd8ff;
-  background-color: #232322;
 
   font-family: "Montserrat-Medium", sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -60,4 +59,8 @@ img {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.active {
+  font-weight: "bold";
 }

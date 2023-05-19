@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import { getUsers } from "../../services/UsersApi";
 import { editFollowing } from "../../services/UsersApi";
-import { HiArrowLeft, HiOutlineFilter } from "react-icons/hi";
+import { HiArrowLeft } from "react-icons/hi";
 import { Link } from "react-router-dom";
 
 import { UsersList } from "../../components/UsersList/UsersList.jsx";
+import { Filter } from "../../components/Filter/Filter";
 import { Loader } from "../../components/Loader/Loader";
 import { Button } from "../../components/Button/Button";
 import { Pagination } from "../../components/Pagination/Pagination";
@@ -16,15 +17,19 @@ const PAGES_LIMIT = 3;
 
 export default function TweetsPage() {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
   const [followed, setFollowed] = useLocalStorage("followed", []);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [isEndOfList, setIsEndOfList] = useState(false);
   const [isFirstRender, setIsFirstRender] = useState(true);
 
-  const isShowLoadMoreButton = users?.length > 0 && !isLoading && !isEndOfList;
+  const isShowLoadMoreButton =
+    filteredUsers?.length > 0 && !isLoading && !isEndOfList;
 
-  const isShownEndOfList = isEndOfList && !isLoading;
+  const isShownEndOfList =
+    (isEndOfList && !isLoading) || (filteredUsers.length === 0 && !isLoading);
+
   const isShownLoader = isLoading || (isEndOfList && isLoading);
 
   useEffect(() => {
@@ -52,7 +57,6 @@ export default function TweetsPage() {
   const isFollowed = (id) => followed.includes(id);
 
   const toggleFollowing = async (id) => {
-    console.log(id);
     const user = users.find((user) => user.id === id);
 
     const body = isFollowed(id)
@@ -81,21 +85,18 @@ export default function TweetsPage() {
                 {"\u202f"} Go back
               </Button>
             </Link>
-            <Button>
-              {" "}
-              <HiOutlineFilter size="14" />
-              {"\u202f"} Filter
-            </Button>
+
+            <Filter users={users} setFilteredUsers={setFilteredUsers} />
           </SC.ButtonsWrapper>
           <UsersList
-            users={users}
+            users={filteredUsers}
             onFollowButton={toggleFollowing}
             isFollowed={isFollowed}
           />
           {isShowLoadMoreButton && <Pagination page={page} setPage={setPage} />}
           {isShownLoader && <Loader />}
           {isShownEndOfList && (
-            <SC.EndOfListText>{"End of list :("}</SC.EndOfListText>
+            <SC.EndOfListText>{"There is the end of list :("}</SC.EndOfListText>
           )}
         </SC.Container>
       </SC.Section>
