@@ -38,6 +38,12 @@ export default function Footer() {
           <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
         </SC.Parallax>
       </SC.Waves>
+      <SC.DeveloperContacts
+        href="https://i-havr.github.io/portfolio-havrylov/"
+        target="_blank"
+      >
+        © 2023 | Developed by Ihor Havrylov
+      </SC.DeveloperContacts>
     </SC.Footer>
   );
 }
