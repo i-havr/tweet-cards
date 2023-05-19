@@ -96,7 +96,9 @@ export default function TweetsPage() {
           {isShowLoadMoreButton && <Pagination page={page} setPage={setPage} />}
           {isShownLoader && <Loader />}
           {isShownEndOfList && (
-            <SC.EndOfListText>{"There is the end of list :("}</SC.EndOfListText>
+            <SC.EndOfListText>
+              {"We have nothing to show you :("}
+            </SC.EndOfListText>
           )}
         </SC.Container>
       </SC.Section>
