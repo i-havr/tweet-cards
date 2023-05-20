@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { HiOutlineFilter } from "react-icons/hi";
 import PropTypes from "prop-types";
-import { getLinkStyle } from "../../helpers/getLinkStyle";
+import { getLinkStyle } from "../../helpers";
+import { FilterButton } from "../";
 
-import { FilterButton } from "../FilterButton/FilterButton";
 import * as SC from "./Filter.styled";
 
 export const Filter = ({ users, setFilteredUsers }) => {

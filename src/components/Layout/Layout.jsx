@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import { App } from "../App/App.styled";
-import Footer from "../Footer/Footer";
+import { Footer } from "../";
 
 export default function Layout() {
   return (

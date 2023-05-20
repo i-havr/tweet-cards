@@ -10,6 +10,6 @@ export const Button = ({ children, actionHandler }) => {
 };
 
 Button.propTypes = {
-  children: PropTypes.node,
+  children: PropTypes.node.isRequired,
   actionHandler: PropTypes.func,
 };

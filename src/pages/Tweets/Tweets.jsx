@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { getUsers } from "../../services/UsersApi";
-import { editFollowing } from "../../services/UsersApi";
-import { HiArrowLeft } from "react-icons/hi";
 import { Link } from "react-router-dom";
+import { HiArrowLeft } from "react-icons/hi";
+import { useLocalStorage } from "../../hooks";
+import { getUsers, editFollowing } from "../../services";
 
-import { UsersList } from "../../components/UsersList/UsersList.jsx";
-import { Filter } from "../../components/Filter/Filter";
-import { Loader } from "../../components/Loader/Loader";
-import { Button } from "../../components/Button/Button";
-import { Pagination } from "../../components/Pagination/Pagination";
+import {
+  Button,
+  Loader,
+  Filter,
+  UsersList,
+  Pagination,
+} from "../../components";
 
 import * as SC from "./Tweets.styled.jsx";
 

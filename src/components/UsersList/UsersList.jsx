@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { UserCard } from "../UserCard/UserCard";
+import { UserCard } from "../";
 
 import * as SC from "./UsersList.styled";
 

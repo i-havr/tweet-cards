@@ -18,8 +18,7 @@ export const CardButton = styled.button`
 
   cursor: pointer;
 
-  &:hover,
-  &:focus {
-    background-color: #b2f1da;
+  &:hover {
+    border-color: #fff;
   }
 `;

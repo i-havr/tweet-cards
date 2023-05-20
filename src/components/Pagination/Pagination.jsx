@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
-import { Button } from "../Button/Button";
-
-// import * as SC from "./Pagination.styled";
+import { Button } from "../";
 
 export const Pagination = ({ setPage }) => {
   const handleLoadMore = () => {

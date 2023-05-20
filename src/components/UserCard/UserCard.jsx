@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
-import { CardButton } from "../CardButton/CardButton";
-import { separateNumbers } from "../../helpers/separateNumbers";
+import { CardButton } from "../";
+import { separateNumbers } from "../../helpers";
 import dialogueClouds from "../../assets/svg/dialogue-clouds.svg";
 import goitLogo from "../../assets/svg/goit-logo.svg";
 
